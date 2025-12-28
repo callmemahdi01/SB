@@ -20,27 +20,33 @@
     }
   },
   "dns": {
+    "fakeip": {
+      "enabled": true,
+      "inet4_range": "198.18.0.0/15",
+      "inet6_range": "fc00::/18"
+    },
+    "independent_cache": true,
+    "final": "proxydns",
+    "strategy": "prefer_ipv4",
+    "disable_cache": false,
+    "disable_expire": false,
+    "default_strategy": "prefer_ipv4",
     "servers": [
       {
         "tag": "proxydns",
-        "address": "tls://8.8.8.8",
-        "address_resolver": "local-resolver",
+        "address": "https://8.8.8.8/dns-query",
+        "strategy": "prefer_ipv4",
         "detour": "select"
       },
       {
         "tag": "localdns",
-        "address": "h3://223.5.5.5/dns-query",
-        "address_resolver": "local-resolver",
+        "address": "https://223.5.5.5/dns-query",
+        "strategy": "prefer_ipv4",
         "detour": "direct"
       },
       {
         "tag": "dns_fakeip",
         "address": "fakeip"
-      },
-      {
-        "tag": "local-resolver",
-        "address": "223.5.5.5",
-        "detour": "direct"
       },
       {
         "tag": "block",
@@ -77,14 +83,7 @@
         ],
         "server": "dns_fakeip"
       }
-    ],
-    "fakeip": {
-      "enabled": true,
-      "inet4_range": "198.18.0.0/15",
-      "inet6_range": "fc00::/18"
-    },
-    "independent_cache": true,
-    "final": "proxydns"
+    ]
   },
   "inbounds": [
     {
@@ -108,18 +107,18 @@
       "default": "auto",
       "outbounds": [
         "auto",
-        "CF_T8_yg8.ygkkk.dpdns.org_443",
-        "CF_T9_yg9.ygkkk.dpdns.org_8443",
-        "CF_T10_yg10.ygkkk.dpdns.org_2053",
-        "CF_T11_yg11.ygkkk.dpdns.org_2083",
-        "CF_T12_yg12.ygkkk.dpdns.org_2087",
-        "CF_T13_yg13.ygkkk.dpdns.org_2096"
+        "CF_b2n.ir_443",
+        "CF_b2n.ir_8443",
+        "CF_zula.ir_2053",
+        "CF_tgju.org_2083",
+        "CF_speedtest_2087",
+        "CF_speedtest_2096"
       ]
     },
     {
-      "server": "yg8.ygkkk.dpdns.org",
+      "server": "b2n.ir",
       "server_port": 443,
-      "tag": "CF_T8_yg8.ygkkk.dpdns.org_443",
+      "tag": "CF_b2n.ir_443",
       "tls": {
         "enabled": true,
         "server_name": "api.ryzencloud.ir",
@@ -139,13 +138,12 @@
         "type": "ws"
       },
       "type": "trojan",
-      "password": "trojan",
-      "domain_strategy": "prefer_ipv4"
+      "password": "trojan"
     },
     {
-      "server": "yg9.ygkkk.dpdns.org",
+      "server": "b2n.ir",
       "server_port": 8443,
-      "tag": "CF_T9_yg9.ygkkk.dpdns.org_8443",
+      "tag": "CF_b2n.ir_8443",
       "tls": {
         "enabled": true,
         "server_name": "api.ryzencloud.ir",
@@ -165,13 +163,12 @@
         "type": "ws"
       },
       "type": "trojan",
-      "password": "trojan",
-      "domain_strategy": "prefer_ipv4"
+      "password": "trojan"
     },
     {
-      "server": "yg10.ygkkk.dpdns.org",
+      "server": "zula.ir",
       "server_port": 2053,
-      "tag": "CF_T10_yg10.ygkkk.dpdns.org_2053",
+      "tag": "CF_zula.ir_2053",
       "tls": {
         "enabled": true,
         "server_name": "api.ryzencloud.ir",
@@ -191,13 +188,12 @@
         "type": "ws"
       },
       "type": "trojan",
-      "password": "trojan",
-      "domain_strategy": "prefer_ipv4"
+      "password": "trojan"
     },
     {
-      "server": "yg11.ygkkk.dpdns.org",
+      "server": "tgju.org",
       "server_port": 2083,
-      "tag": "CF_T11_yg11.ygkkk.dpdns.org_2083",
+      "tag": "CF_tgju.org_2083",
       "tls": {
         "enabled": true,
         "server_name": "api.ryzencloud.ir",
@@ -217,13 +213,12 @@
         "type": "ws"
       },
       "type": "trojan",
-      "password": "trojan",
-      "domain_strategy": "prefer_ipv4"
+      "password": "trojan"
     },
     {
-      "server": "yg12.ygkkk.dpdns.org",
+      "server": "www.speedtest.net",
       "server_port": 2087,
-      "tag": "CF_T12_yg12.ygkkk.dpdns.org_2087",
+      "tag": "CF_speedtest_2087",
       "tls": {
         "enabled": true,
         "server_name": "api.ryzencloud.ir",
@@ -243,13 +238,12 @@
         "type": "ws"
       },
       "type": "trojan",
-      "password": "trojan",
-      "domain_strategy": "prefer_ipv4"
+      "password": "trojan"
     },
     {
-      "server": "yg13.ygkkk.dpdns.org",
+      "server": "www.speedtest.net",
       "server_port": 2096,
-      "tag": "CF_T13_yg13.ygkkk.dpdns.org_2096",
+      "tag": "CF_speedtest_2096",
       "tls": {
         "enabled": true,
         "server_name": "api.ryzencloud.ir",
@@ -269,8 +263,7 @@
         "type": "ws"
       },
       "type": "trojan",
-      "password": "trojan",
-      "domain_strategy": "prefer_ipv4"
+      "password": "trojan"
     },
     {
       "tag": "direct",
@@ -280,12 +273,12 @@
       "tag": "auto",
       "type": "urltest",
       "outbounds": [
-        "CF_T8_yg8.ygkkk.dpdns.org_443",
-        "CF_T9_yg9.ygkkk.dpdns.org_8443",
-        "CF_T10_yg10.ygkkk.dpdns.org_2053",
-        "CF_T11_yg11.ygkkk.dpdns.org_2083",
-        "CF_T12_yg12.ygkkk.dpdns.org_2087",
-        "CF_T13_yg13.ygkkk.dpdns.org_2096"
+        "CF_b2n.ir_443",
+        "CF_b2n.ir_8443",
+        "CF_zula.ir_2053",
+        "CF_tgju.org_2083",
+        "CF_speedtest_2087",
+        "CF_speedtest_2096"
       ],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "1m",
