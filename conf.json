@@ -5,14 +5,6 @@
     "timestamp": true
   },
   "experimental": {
-    "clash_api": {
-      "external_controller": "127.0.0.1:9090",
-      "external_ui": "ui",
-      "external_ui_download_url": "",
-      "external_ui_download_detour": "",
-      "secret": "",
-      "default_mode": "Rule"
-    },
     "cache_file": {
       "enabled": true,
       "path": "cache.db",
@@ -22,18 +14,18 @@
   "dns": {
     "servers": [
       {
+        "type": "remote",
         "tag": "proxydns",
-        "address": "tls://8.8.8.8/dns-query",
-        "detour": "select"
+        "address": "tls://8.8.8.8"
       },
       {
+        "type": "remote",
         "tag": "localdns",
-        "address": "https://223.5.5.5/dns-query",
-        "detour": "direct"
+        "address": "https://223.5.5.5/dns-query"
       },
       {
-        "tag": "dns_fakeip",
-        "address": "fakeip"
+        "type": "fakeip",
+        "tag": "dns_fakeip"
       }
     ],
     "rules": [
@@ -109,6 +101,9 @@
       "server": "b2n.ir",
       "server_port": 443,
       "password": "trojan",
+      "domain_resolver": {
+        "server": "localdns"
+      },
       "tls": {
         "enabled": true,
         "server_name": "api.ryzencloud.ir",
@@ -131,6 +126,9 @@
       "server": "zula.ir",
       "server_port": 2053,
       "password": "trojan",
+      "domain_resolver": {
+        "server": "localdns"
+      },
       "tls": {
         "enabled": true,
         "server_name": "api.ryzencloud.ir",
@@ -153,6 +151,9 @@
       "server": "tgju.org",
       "server_port": 2083,
       "password": "trojan",
+      "domain_resolver": {
+        "server": "localdns"
+      },
       "tls": {
         "enabled": true,
         "server_name": "api.ryzencloud.ir",
@@ -175,6 +176,9 @@
       "server": "www.speedtest.net",
       "server_port": 2096,
       "password": "trojan",
+      "domain_resolver": {
+        "server": "localdns"
+      },
       "tls": {
         "enabled": true,
         "server_name": "api.ryzencloud.ir",
@@ -196,6 +200,14 @@
       "type": "direct"
     },
     {
+      "tag": "block",
+      "type": "block"
+    },
+    {
+      "tag": "dns-out",
+      "type": "dns"
+    },
+    {
       "tag": "auto",
       "type": "urltest",
       "outbounds": [
@@ -205,7 +217,8 @@
         "CF_speedtest"
       ],
       "url": "https://www.gstatic.com/generate_204",
-      "interval": "1m"
+      "interval": "1m",
+      "tolerance": 50
     }
   ],
   "route": {
@@ -221,7 +234,7 @@
         "tag": "geosite-cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/geolocation-cn.srs",
+        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/cn.srs",
         "download_detour": "select"
       },
       {
@@ -236,17 +249,13 @@
     "final": "select",
     "rules": [
       {
-        "inbound": "tun-in",
-        "action": "sniff"
-      },
-      {
         "protocol": "dns",
-        "action": "hijack-dns"
+        "outbound": "dns-out"
       },
       {
         "port": 443,
         "network": "udp",
-        "action": "reject"
+        "outbound": "block"
       },
       {
         "clash_mode": "Direct",
@@ -273,5 +282,12 @@
         "outbound": "select"
       }
     ]
+  },
+  "ntp": {
+    "enabled": true,
+    "server": "time.apple.com",
+    "server_port": 123,
+    "interval": "30m",
+    "detour": "direct"
   }
 }
