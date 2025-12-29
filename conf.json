@@ -18,7 +18,8 @@
       },
       {
         "tag": "dns_fakeip",
-        "address": "fakeip"
+        "address": "fakeip",
+        "strategy": "prefer_ipv4"
       },
       {
         "tag": "dns_block",
@@ -26,11 +27,6 @@
       }
     ],
     "rules": [
-      {
-        "outbound": "any",
-        "server": "localdns",
-        "disable_cache": true
-      },
       {
         "clash_mode": "Global",
         "server": "proxydns"
@@ -45,25 +41,26 @@
       },
       {
         "rule_set": "geosite-geolocation-!cn",
-        "server": "proxydns"
-      },
-      {
-        "rule_set": "geosite-geolocation-!cn",
         "query_type": [
           "A",
           "AAAA"
         ],
         "server": "dns_fakeip"
+      },
+      {
+        "rule_set": "geosite-geolocation-!cn",
+        "server": "proxydns"
       }
     ],
+    "final": "proxydns",
     "fakeip": {
       "enabled": true,
       "inet4_range": "198.18.0.0/15",
       "inet6_range": "fc00::/18"
     },
-    "independent_cache": true,
-    "final": "proxydns",
-    "strategy": "prefer_ipv4"
+    "strategy": "prefer_ipv4",
+    "disable_cache": false,
+    "reverse_mapping": false
   },
   "ntp": {
     "enabled": true,
@@ -97,12 +94,6 @@
         "auto",
         "CF_T1_b2n.ir_443",
         "CF_T2_b2n.ir_8443",
-        "CF_T3_zula.ir_2053",
-        "CF_T4_zula.ir_2083",
-        "CF_T5_tgju.org_2087",
-        "CF_T6_tgju.org_2096",
-        "CF_T7_www.speedtest.net_443",
-        "CF_T8_www.speedtest.net_8443",
         "direct"
       ]
     },
@@ -113,7 +104,6 @@
       "tls": {
         "enabled": true,
         "server_name": "api.ryzencloud.ir",
-        "insecure": false,
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -121,9 +111,7 @@
       },
       "transport": {
         "headers": {
-          "Host": [
-            "api.ryzencloud.ir"
-          ]
+          "Host": ["api.ryzencloud.ir"]
         },
         "path": "/?ed=2560",
         "type": "ws"
@@ -138,7 +126,6 @@
       "tls": {
         "enabled": true,
         "server_name": "api.ryzencloud.ir",
-        "insecure": false,
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -146,159 +133,7 @@
       },
       "transport": {
         "headers": {
-          "Host": [
-            "api.ryzencloud.ir"
-          ]
-        },
-        "path": "/?ed=2560",
-        "type": "ws"
-      },
-      "type": "trojan",
-      "password": "trojan"
-    },
-    {
-      "server": "zula.ir",
-      "server_port": 2053,
-      "tag": "CF_T3_zula.ir_2053",
-      "tls": {
-        "enabled": true,
-        "server_name": "api.ryzencloud.ir",
-        "insecure": false,
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "headers": {
-          "Host": [
-            "api.ryzencloud.ir"
-          ]
-        },
-        "path": "/?ed=2560",
-        "type": "ws"
-      },
-      "type": "trojan",
-      "password": "trojan"
-    },
-    {
-      "server": "zula.ir",
-      "server_port": 2083,
-      "tag": "CF_T4_zula.ir_2083",
-      "tls": {
-        "enabled": true,
-        "server_name": "api.ryzencloud.ir",
-        "insecure": false,
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "headers": {
-          "Host": [
-            "api.ryzencloud.ir"
-          ]
-        },
-        "path": "/?ed=2560",
-        "type": "ws"
-      },
-      "type": "trojan",
-      "password": "trojan"
-    },
-    {
-      "server": "tgju.org",
-      "server_port": 2087,
-      "tag": "CF_T5_tgju.org_2087",
-      "tls": {
-        "enabled": true,
-        "server_name": "api.ryzencloud.ir",
-        "insecure": false,
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "headers": {
-          "Host": [
-            "api.ryzencloud.ir"
-          ]
-        },
-        "path": "/?ed=2560",
-        "type": "ws"
-      },
-      "type": "trojan",
-      "password": "trojan"
-    },
-    {
-      "server": "tgju.org",
-      "server_port": 2096,
-      "tag": "CF_T6_tgju.org_2096",
-      "tls": {
-        "enabled": true,
-        "server_name": "api.ryzencloud.ir",
-        "insecure": false,
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "headers": {
-          "Host": [
-            "api.ryzencloud.ir"
-          ]
-        },
-        "path": "/?ed=2560",
-        "type": "ws"
-      },
-      "type": "trojan",
-      "password": "trojan"
-    },
-    {
-      "server": "www.speedtest.net",
-      "server_port": 443,
-      "tag": "CF_T7_www.speedtest.net_443",
-      "tls": {
-        "enabled": true,
-        "server_name": "api.ryzencloud.ir",
-        "insecure": false,
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "headers": {
-          "Host": [
-            "api.ryzencloud.ir"
-          ]
-        },
-        "path": "/?ed=2560",
-        "type": "ws"
-      },
-      "type": "trojan",
-      "password": "trojan"
-    },
-    {
-      "server": "www.speedtest.net",
-      "server_port": 8443,
-      "tag": "CF_T8_www.speedtest.net_8443",
-      "tls": {
-        "enabled": true,
-        "server_name": "api.ryzencloud.ir",
-        "insecure": false,
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "headers": {
-          "Host": [
-            "api.ryzencloud.ir"
-          ]
+          "Host": ["api.ryzencloud.ir"]
         },
         "path": "/?ed=2560",
         "type": "ws"
@@ -323,18 +158,10 @@
       "type": "urltest",
       "outbounds": [
         "CF_T1_b2n.ir_443",
-        "CF_T2_b2n.ir_8443",
-        "CF_T3_zula.ir_2053",
-        "CF_T4_zula.ir_2083",
-        "CF_T5_tgju.org_2087",
-        "CF_T6_tgju.org_2096",
-        "CF_T7_www.speedtest.net_443",
-        "CF_T8_www.speedtest.net_8443"
+        "CF_T2_b2n.ir_8443"
       ],
       "url": "https://www.gstatic.com/generate_204",
-      "interval": "1m",
-      "tolerance": 50,
-      "interrupt_exist_connections": false
+      "interval": "1m"
     }
   ],
   "route": {
@@ -344,28 +171,23 @@
         "type": "remote",
         "format": "binary",
         "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/geolocation-!cn.srs",
-        "download_detour": "select",
-        "update_interval": "1d"
+        "download_detour": "select"
       },
       {
         "tag": "geosite-cn",
         "type": "remote",
         "format": "binary",
         "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/geolocation-cn.srs",
-        "download_detour": "select",
-        "update_interval": "1d"
+        "download_detour": "select"
       },
       {
         "tag": "geoip-cn",
         "type": "remote",
         "format": "binary",
         "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geoip/cn.srs",
-        "download_detour": "select",
-        "update_interval": "1d"
+        "download_detour": "select"
       }
     ],
-    "auto_detect_interface": true,
-    "final": "select",
     "rules": [
       {
         "protocol": "dns",
@@ -400,16 +222,16 @@
         "rule_set": "geosite-geolocation-!cn",
         "outbound": "select"
       }
-    ]
+    ],
+    "final": "select",
+    "auto_detect_interface": true,
+    "default_domain_resolver": "localdns"
   },
   "services": [],
   "experimental": {
     "clash_api": {
       "external_controller": "127.0.0.1:9090",
       "external_ui": "ui",
-      "external_ui_download_url": "https://github.com/MetaCubeX/Yacd-meta/archive/gh-pages.zip",
-      "external_ui_download_detour": "select",
-      "secret": "",
       "default_mode": "Rule"
     },
     "cache_file": {
