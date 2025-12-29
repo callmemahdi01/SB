@@ -85,8 +85,7 @@
       "address": ["172.19.0.1/30", "fd00::1/126"],
       "auto_route": true,
       "strict_route": true,
-      "sniff": true,
-      "domain_strategy": "prefer_ipv4"
+      "sniff": true
     }
   ],
 
@@ -132,12 +131,11 @@
       "interrupt_exist_connections": false
     },
 
-    
     {
+      "type": "trojan",
+      "tag": "CF_T1_b2n.ir_443",
       "server": "b2n.ir",
       "server_port": 443,
-      "tag": "CF_T1_b2n.ir_443",
-      "type": "trojan",
       "password": "trojan",
       "tls": {
         "enabled": true,
@@ -156,10 +154,10 @@
     },
 
     {
+      "type": "trojan",
+      "tag": "CF_T2_b2n.ir_8443",
       "server": "b2n.ir",
       "server_port": 8443,
-      "tag": "CF_T2_b2n.ir_8443",
-      "type": "trojan",
       "password": "trojan",
       "tls": {
         "enabled": true,
@@ -178,10 +176,10 @@
     },
 
     {
+      "type": "trojan",
+      "tag": "CF_T3_zula.ir_2053",
       "server": "zula.ir",
       "server_port": 2053,
-      "tag": "CF_T3_zula.ir_2053",
-      "type": "trojan",
       "password": "trojan",
       "tls": {
         "enabled": true,
@@ -200,10 +198,10 @@
     },
 
     {
+      "type": "trojan",
+      "tag": "CF_T4_zula.ir_2083",
       "server": "zula.ir",
       "server_port": 2083,
-      "tag": "CF_T4_zula.ir_2083",
-      "type": "trojan",
       "password": "trojan",
       "tls": {
         "enabled": true,
@@ -222,10 +220,10 @@
     },
 
     {
+      "type": "trojan",
+      "tag": "CF_T5_tgju.org_2087",
       "server": "tgju.org",
       "server_port": 2087,
-      "tag": "CF_T5_tgju.org_2087",
-      "type": "trojan",
       "password": "trojan",
       "tls": {
         "enabled": true,
@@ -244,10 +242,10 @@
     },
 
     {
+      "type": "trojan",
+      "tag": "CF_T6_tgju.org_2096",
       "server": "tgju.org",
       "server_port": 2096,
-      "tag": "CF_T6_tgju.org_2096",
-      "type": "trojan",
       "password": "trojan",
       "tls": {
         "enabled": true,
@@ -266,10 +264,10 @@
     },
 
     {
+      "type": "trojan",
+      "tag": "CF_T7_www.speedtest.net_443",
       "server": "www.speedtest.net",
       "server_port": 443,
-      "tag": "CF_T7_www.speedtest.net_443",
-      "type": "trojan",
       "password": "trojan",
       "tls": {
         "enabled": true,
@@ -288,10 +286,10 @@
     },
 
     {
+      "type": "trojan",
+      "tag": "CF_T8_www.speedtest.net_8443",
       "server": "www.speedtest.net",
       "server_port": 8443,
-      "tag": "CF_T8_www.speedtest.net_8443",
-      "type": "trojan",
       "password": "trojan",
       "tls": {
         "enabled": true,
@@ -313,7 +311,6 @@
   "route": {
     "auto_detect_interface": true,
     "final": "select",
-
     "rule_set": [
       {
         "tag": "geosite-geolocation-!cn",
@@ -340,7 +337,6 @@
         "update_interval": "1d"
       }
     ],
-
     "rules": [
       {
         "inbound": "tun-in",
